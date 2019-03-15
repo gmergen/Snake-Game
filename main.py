@@ -41,12 +41,13 @@ pygame.draw.rect(game_Display, black, (border_side + 3, border_top + 3, window_W
 
 # main game loop
 while snake.is_alive:
+    snake.show(game_Display, wall_left, wall_right)
    # event handling
-   for event in pygame.event.get():
+    for event in pygame.event.get():
        #print(str(event))
        if event.type == pygame.QUIT:
            snake.is_alive = False
-   pygame.display.update()
+    pygame.display.update()
 
 
 pygame.quit()

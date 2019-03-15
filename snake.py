@@ -4,6 +4,13 @@ class Snake:
        self.direction = 0
        self.score = 0
        self.length = 1
-    def show(self, gameDisplay, wall_left, wall_right):
+       self.xcor = xcor
+       self.ycor = ycor
+       self.img = image
+       self.speed = speed
+       self.width = image.get_width()
+       self.height = image.get_height()
+   def show(self, game_Display, wall_left, wall_right):
+        game_Display.blit(self.img, (self.xcor, self.ycor))
         new_xcor = self.xcor + self.direction * self.speed
         new_ycor = self.ycor + self.direction * self.speed
