@@ -18,6 +18,9 @@ wall_left = border_side + border_width
 wall_right = window_Width - border_side - border_width
 wall_bottom = window_Height - border_bottom - border_width
 
+# clock
+clock = pygame.time.Clock()
+
 #colors
 black = (0,0,0)
 white = (255,255,255)
@@ -47,7 +50,19 @@ while snake.is_alive:
        #print(str(event))
        if event.type == pygame.QUIT:
            snake.is_alive = False
+       if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_LEFT:
+                snake.move_left()
+            elif event.key == pygame.K_RIGHT:
+                snake.move_right()
+            elif event.key == pygame.K_UP:
+                snake.move_up()
+            elif event.key == pygame.K_DOWN:
+                snake.move_down()
+    
     pygame.display.update()
+    clock.tick(60)
+
 
 
 pygame.quit()
