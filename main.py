@@ -6,10 +6,17 @@ from snake import Snake
 window_Width = 700
 window_Height = 500
 
+# game border properties
 border_side = 10
 border_top = 40
 border_bottom = border_top
 border_width = 3
+
+# wall properties
+wall_top = border_top + border_width
+wall_left = border_side + border_width
+wall_right = window_Width - border_side - border_width
+wall_bottom = window_Height - border_bottom - border_width
 
 #colors
 black = (0,0,0)
@@ -32,7 +39,7 @@ pygame.draw.rect(game_Display, black, (border_side + 3, border_top + 3, window_W
        window_Height - border_top - border_bottom - 6))
 
 
-
+# main game loop
 while snake.is_alive:
    # event handling
    for event in pygame.event.get():
