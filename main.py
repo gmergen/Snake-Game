@@ -1,5 +1,6 @@
 import pygame
 from snake import Snake
+from mouse import Mouse
 
 
 # establish window dimensions
@@ -27,30 +28,28 @@ white = (255,255,255)
 
 # load object images
 snake_Image = pygame.image.load("greenSquare.jpg")
+mouse_Image = pygame.image.load("mouse.gif")
 
 pygame.init()
 
 game_Display = pygame.display.set_mode((window_Width, window_Height))
 
 
-# instantiate snake
+# instantiate objects
 snake = Snake(350, 250, snake_Image, 5)
+mouse = Mouse(250, 100, mouse_Image)
 
-# draw border
-pygame.draw.rect(game_Display, white, (border_side, border_top, window_Width - border_side * 2, window_Height - border_top - border_bottom))
-pygame.draw.rect(game_Display, black, (border_side + 3, border_top + 3, window_Width - border_side * 2 - 6,
-       window_Height - border_top - border_bottom - 6))
 
 
 # main game loop
 while snake.is_alive:
-    snake.show(game_Display, wall_left, wall_right)
+    
    # event handling
     for event in pygame.event.get():
        #print(str(event))
-       if event.type == pygame.QUIT:
-           snake.is_alive = False
-       if event.type == pygame.KEYDOWN:
+        if event.type == pygame.QUIT:
+            snake.is_alive = False
+        if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_LEFT:
                 snake.move_left()
             elif event.key == pygame.K_RIGHT:
@@ -59,7 +58,18 @@ while snake.is_alive:
                 snake.move_up()
             elif event.key == pygame.K_DOWN:
                 snake.move_down()
-    
+
+        game_Display.blit(game_Display, (0,0))
+        game_Display.fill(black)
+
+        # draw border
+        pygame.draw.rect(game_Display, white, (border_side, border_top, window_Width - border_side * 2, window_Height - border_top - border_bottom))
+        pygame.draw.rect(game_Display, black, (border_side + 3, border_top + 3, window_Width - border_side * 2 - 6,
+        window_Height - border_top - border_bottom - 6))
+
+    snake.show(game_Display, wall_left, wall_right)
+    mouse.show(game_Display)
+
     pygame.display.update()
     clock.tick(60)
 
