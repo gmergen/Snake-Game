@@ -36,7 +36,7 @@ game_Display = pygame.display.set_mode((window_Width, window_Height))
 
 
 # instantiate objects
-snake = Snake(350, 250, snake_Image, 5)
+snake = Snake(350, 250, snake_Image, 3)
 mouse = Mouse(250, 100, mouse_Image)
 
 
