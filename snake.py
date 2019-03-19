@@ -28,3 +28,4 @@ class Snake:
         self.direction = "DOWN"
     def move_up(self):
         self.direction = "UP"
+   # def collides_with(self, foreign_object):

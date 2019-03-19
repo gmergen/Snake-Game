@@ -58,6 +58,15 @@ while snake.is_alive:
                 snake.move_up()
             elif event.key == pygame.K_DOWN:
                 snake.move_down()
+    #snake + border collision properties
+    if snake.xcor < wall_left + snake.width / 2:
+        snake.is_alive = False
+    if snake.xcor > wall_right - snake.width * 1.5:
+        snake.is_alive = False
+    if snake.ycor < wall_top + snake.height / 2:
+        snake.is_alive = False
+    if snake.ycor > wall_bottom - snake.height * 1.5:
+        snake.is_alive = False
 
     game_Display.blit(game_Display, (0,0))
     game_Display.fill(black)
