@@ -36,7 +36,15 @@ game_Display = pygame.display.set_mode((window_Width, window_Height))
 
 
 # instantiate objects
-snake = Snake(350, 250, snake_Image, 5)
+snake = Snake(350, 250, snake_Image, 3)
+
+
+#snakes = []
+
+#snakes.append(Snake(350 + snake.width * 2, 250, snake_Image, 3))
+#snakes.append(Snake(350 + snake.width, 250, snake_Image, 3))
+#snakes.append(Snake(350, 250, snake_Image, 3))
+
 mouse = Mouse(250, 100, mouse_Image)
 
 
@@ -59,13 +67,13 @@ while snake.is_alive:
             elif event.key == pygame.K_DOWN:
                 snake.move_down()
     #snake + border collision properties
-    if snake.xcor < wall_left + snake.width / 2:
+    if snake.xcor < wall_left + snake.width / 2 - 0.25:
         snake.is_alive = False
-    if snake.xcor > wall_right - snake.width * 1.5:
+    elif snake.xcor > wall_right - snake.width * 1.5:
         snake.is_alive = False
-    if snake.ycor < wall_top + snake.height / 2:
+    elif snake.ycor < wall_top + snake.height / 2 - 0.25:
         snake.is_alive = False
-    if snake.ycor > wall_bottom - snake.height * 1.5:
+    elif snake.ycor > wall_bottom - snake.height * 1.5:
         snake.is_alive = False
 
     game_Display.blit(game_Display, (0,0))
@@ -79,8 +87,12 @@ while snake.is_alive:
     snake.show(game_Display, wall_left, wall_right)
     mouse.show(game_Display)
 
+    #for snake in snakes:
+    #    snake.show(game_Display, wall_left, wall_right)
+
+    
     pygame.display.update()
-    clock.tick(60)
+    clock.tick(10)
 
 
 

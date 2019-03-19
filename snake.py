@@ -10,16 +10,25 @@ class Snake:
         self.speed = speed
         self.width = image.get_width()
         self.height = image.get_height()
+        self.body = [[xcor,ycor], [xcor + self.width,ycor], [xcor + self.width * 2,ycor]]
     def show(self, game_Display, wall_left, wall_right):
         if self.direction == "RIGHT":
-            self.xcor = self.xcor + self.speed
+            self.body.insert(0, [self.body[0][0] + self.width, self.body[0][1]])
+            self.body.pop() 
+            #self.xcor = xcor + self.speed
         elif self.direction == "LEFT":
-            self.xcor = self.xcor - self.speed
+            self.body.insert(0, [self.body[0][0] - self.width, self.body[0][1]])
+            self.body.pop()
         elif self.direction == "UP":
-            self.ycor = self.ycor - self.speed 
+            self.body.insert(0, [self.body[0][0], self.body [0][1] - self.height])
+            self.body.pop()
         elif self.direction == "DOWN":
-            self.ycor = self.ycor + self.speed
-        game_Display.blit(self.img, (self.xcor, self.ycor))
+            self.body.insert(0, [self.body[0][0], self.body[0][1] + self.height])
+            self.body.pop()
+        for part in self.body:
+            game_Display.blit(self.img, (part[0], part[1]))
+        #game_Display.blit(self.img, (self.xcor, self.ycor))
+        #changes direction of snake
     def move_left(self):
         self.direction = "LEFT"
     def move_right(self):
