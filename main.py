@@ -72,6 +72,7 @@ while snake.is_alive:
                 snake.move_down()
     if snake.collides_with(mouse):
         mouse.change_position(randint(wall_left + 10, wall_right - 10), randint(wall_top + 5, wall_bottom - 15))
+        snake.grow() 
     
     #snake + border collision properties
     if snake.body[0][0] < wall_left + 3:

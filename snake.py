@@ -46,3 +46,20 @@ class Snake:
         and foreign_object.xcor + foreign_object.width > self.body[0][0] \
         and foreign_object.ycor < self.body[0][1] + self.height \
         and foreign_object.ycor + self.height > self.body[0][1] 
+    def grow(self):
+        # for last body part
+        x = self.body[len(self.body) - 1][0]
+        y = self.body[len(self.body) - 1][1]
+        # for second to last body part
+        x2 = self.body[len(self.body) - 2][0]
+        y2 = self.body[len(self.body) - 2][1]
+        # add to snake's body for each direction
+        if x < x2:
+            self.body.append((x - self.width, y))
+        elif x > x2:
+            self.body.append((x + self.width, y))
+        elif y < y2:
+            self.body.append((x, y - self.height))
+        elif y > y2:
+            self.body.append((x, y + self.height))
+
