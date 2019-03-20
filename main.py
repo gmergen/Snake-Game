@@ -40,16 +40,9 @@ game_Display = pygame.display.set_mode((window_Width, window_Height))
 
 
 # instantiate objects
-snake = Snake(350, 250, snake_Image, 3)
-
-
-#snakes = []
-
-#snakes.append(Snake(350 + snake.width * 2, 250, snake_Image, 3))
-#snakes.append(Snake(350 + snake.width, 250, snake_Image, 3))
-#snakes.append(Snake(350, 250, snake_Image, 3))
-
-mouse = Mouse(250, 100, mouse_Image)
+snake = Snake(347, 255, snake_Image, 3)
+mouse = Mouse(247, 105, mouse_Image)
+snake.direction = "LEFT"
 
 
 
@@ -73,16 +66,6 @@ while snake.is_alive:
     if snake.collides_with(mouse):
         mouse.change_position(randint(wall_left + 10, wall_right - 10), randint(wall_top + 5, wall_bottom - 15))
         snake.grow() 
-    
-    #snake + border collision properties
-    if snake.body[0][0] < wall_left + 3:
-        snake.is_alive = False
-    elif snake.body[0][0] > wall_right - snake.width:
-        snake.is_alive = False
-    elif snake.body[0][1] < wall_top + 1:
-        snake.is_alive = False
-    elif snake.body[0][1] > wall_bottom - snake.width:
-        snake.is_alive = False
 
     game_Display.blit(game_Display, (0,0))
     game_Display.fill(black)
@@ -95,7 +78,19 @@ while snake.is_alive:
     snake.show(game_Display, wall_left, wall_right)
     mouse.show(game_Display)
 
-    
+     #snake + border collision properties
+    if snake.body[0][0] < wall_left + snake.width - snake.width / 2:
+        snake.is_alive = False
+    elif snake.body[0][0] > wall_right - snake.width:
+        snake.is_alive = False
+    elif snake.body[0][1] < wall_top:
+        snake.is_alive = False
+    elif snake.body[0][1] > wall_bottom - snake.height:
+        snake.is_alive = False
+    # snake dies if touches self
+    if snake.collides_with_self():
+        snake.is_alive = False
+
     pygame.display.update()
     clock.tick(10)
 
