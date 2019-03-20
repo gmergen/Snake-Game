@@ -8,3 +8,6 @@ class Mouse:
         self.height = image.get_height()
     def show(self, game_Display): 
         game_Display.blit(self.img, (self.xcor, self.ycor))
+    def change_position(self, xcor, ycor):
+        self.xcor = xcor
+        self.ycor = ycor

@@ -1,4 +1,5 @@
 import pygame
+from random import randint
 from snake import Snake
 from mouse import Mouse
 
@@ -25,6 +26,9 @@ clock = pygame.time.Clock()
 #colors
 black = (0,0,0)
 white = (255,255,255)
+red = (255,0,0)
+green = (0,255,0)
+blue = (0,0,255)
 
 # load object images
 snake_Image = pygame.image.load("greenSquare.jpg")
@@ -54,7 +58,7 @@ while snake.is_alive:
     
    # event handling
     for event in pygame.event.get():
-       #print(str(event))
+       #print(str(event)) and mouse collision properties
         if event.type == pygame.QUIT:
             snake.is_alive = False
         if event.type == pygame.KEYDOWN:
@@ -66,29 +70,29 @@ while snake.is_alive:
                 snake.move_up()
             elif event.key == pygame.K_DOWN:
                 snake.move_down()
+    if snake.collides_with(mouse):
+        mouse.change_position(randint(wall_left + 10, wall_right - 10), randint(wall_top + 5, wall_bottom - 15))
+    
     #snake + border collision properties
-    if snake.xcor < wall_left + snake.width / 2 - 0.25:
+    if snake.body[0][0] < wall_left + 3:
         snake.is_alive = False
-    elif snake.xcor > wall_right - snake.width * 1.5:
+    elif snake.body[0][0] > wall_right - snake.width:
         snake.is_alive = False
-    elif snake.ycor < wall_top + snake.height / 2 - 0.25:
+    elif snake.body[0][1] < wall_top + 1:
         snake.is_alive = False
-    elif snake.ycor > wall_bottom - snake.height * 1.5:
+    elif snake.body[0][1] > wall_bottom - snake.width:
         snake.is_alive = False
 
     game_Display.blit(game_Display, (0,0))
     game_Display.fill(black)
 
     # draw border
-    pygame.draw.rect(game_Display, white, (border_side, border_top, window_Width - border_side * 2, window_Height - border_top - border_bottom))
+    pygame.draw.rect(game_Display, red, (border_side, border_top, window_Width - border_side * 2, window_Height - border_top - border_bottom))
     pygame.draw.rect(game_Display, black, (border_side + 3, border_top + 3, window_Width - border_side * 2 - 6,
     window_Height - border_top - border_bottom - 6))
 
     snake.show(game_Display, wall_left, wall_right)
     mouse.show(game_Display)
-
-    #for snake in snakes:
-    #    snake.show(game_Display, wall_left, wall_right)
 
     
     pygame.display.update()

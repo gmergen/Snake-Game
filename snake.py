@@ -30,11 +30,19 @@ class Snake:
         #game_Display.blit(self.img, (self.xcor, self.ycor))
         #changes direction of snake
     def move_left(self):
-        self.direction = "LEFT"
+        if self.direction != "RIGHT":
+            self.direction = "LEFT"
     def move_right(self):
-        self.direction = "RIGHT"
+        if self.direction != "LEFT":
+            self.direction = "RIGHT"
     def move_down(self):
-        self.direction = "DOWN"
+        if self.direction != "UP":
+            self.direction = "DOWN"
     def move_up(self):
-        self.direction = "UP"
-   # def collides_with(self, foreign_object):
+        if self.direction != "DOWN":
+            self.direction = "UP"
+    def collides_with(self, foreign_object):
+        return foreign_object.xcor < self.body[0][0] + self.width \
+        and foreign_object.xcor + foreign_object.width > self.body[0][0] \
+        and foreign_object.ycor < self.body[0][1] + self.height \
+        and foreign_object.ycor + self.height > self.body[0][1] 
