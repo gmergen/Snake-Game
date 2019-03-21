@@ -111,6 +111,20 @@ while snake.is_alive:
     pygame.display.update()
     clock.tick(10)
 
+# final screen load after death
+show_final_screen = True
+while show_final_screen:
+    score_text = score_font.render('SCORE: ' + str(snake.score), False, blue)
+    game_Display.blit(score_text, (window_Width / 2 - score_text.get_width() / 2, window_Height / 2))
+
+    pygame.display.update()
+
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            show_final_screen = False
+        elif event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_SPACE:
+                show_final_screen = False
 
 
 pygame.quit()
