@@ -38,6 +38,7 @@ mouse_Image = pygame.image.load("mouse.gif")
 
 # load sounds
 horn_sound = pygame.mixer.Sound('horn.wav')
+eat_sound = pygame.mixer.Sound('eat.wav')
 pygame.mixer.music.load('Anaconda.wav')
 pygame.mixer.music.play(-1)
 
@@ -77,6 +78,7 @@ while snake.is_alive:
         mouse.change_position(wall_left, wall_right, wall_top, wall_bottom, snake)
         snake.grow()
         snake.change_score(100)
+        eat_sound.play()
     
     
     game_Display.blit(game_Display, (0,0))
