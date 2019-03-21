@@ -30,14 +30,24 @@ red = (255,0,0)
 green = (0,255,0)
 blue = (0,0,255)
 
+pygame.init()
+
 # load object images
 snake_Image = pygame.image.load("greenSquare.jpg")
 mouse_Image = pygame.image.load("mouse.gif")
 
-pygame.init()
+# load sounds
+horn_sound = pygame.mixer.Sound('horn.wav')
+pygame.mixer.music.load('Anaconda.mp3')
+pygame.mixer.music.play(-1)
 
+# title and score font creation
+title_font = pygame.font.SysFont('Arial', 40, True)
+score_font = pygame.font.SysFont('Arial', 26, True)
+
+#set window caption instead of "pygame.window"
 game_Display = pygame.display.set_mode((window_Width, window_Height))
-
+pygame.display.set_caption('Snake')
 
 # instantiate objects
 snake = Snake(347, 255, snake_Image, 3)
@@ -65,10 +75,17 @@ while snake.is_alive:
                 snake.move_down()
     if snake.collides_with(mouse):
         mouse.change_position(wall_left, wall_right, wall_top, wall_bottom, snake)
-        snake.grow() 
-
+        snake.grow()
+        snake.change_score(100)
+    
+    
     game_Display.blit(game_Display, (0,0))
     game_Display.fill(black)
+    #display PYTHON title and score board
+    title_text = title_font.render('PYTHON', False, green)
+    game_Display.blit(title_text, (window_Width / 2 - title_text.get_width() / 2, 5))
+    score_text = score_font.render('SCORE: ' + str(snake.score), False, blue)
+    game_Display.blit(score_text, (wall_left, wall_bottom + border_width))
 
     # draw border
     pygame.draw.rect(game_Display, red, (border_side, border_top, window_Width - border_side * 2, window_Height - border_top - border_bottom))

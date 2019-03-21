@@ -3,7 +3,6 @@ class Snake:
         self.is_alive = True
         self.direction = ""
         self.score = 0
-        self.length = 3
         self.xcor = xcor
         self.ycor = ycor
         self.img = image
@@ -69,4 +68,6 @@ class Snake:
             self.body.append((x, y - self.height))
         elif y > y2:
             self.body.append((x, y + self.height))
+    def change_score(self, amount_to_change_by):
+        self.score += amount_to_change_by 
 
