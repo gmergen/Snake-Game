@@ -64,7 +64,7 @@ while snake.is_alive:
             elif event.key == pygame.K_DOWN:
                 snake.move_down()
     if snake.collides_with(mouse):
-        mouse.change_position(randint(wall_left + 10, wall_right - 10), randint(wall_top + 5, wall_bottom - 15))
+        mouse.change_position(wall_left, wall_right, wall_top, wall_bottom, snake)
         snake.grow() 
 
     game_Display.blit(game_Display, (0,0))
