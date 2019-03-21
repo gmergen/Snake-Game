@@ -38,7 +38,7 @@ mouse_Image = pygame.image.load("mouse.gif")
 
 # load sounds
 horn_sound = pygame.mixer.Sound('horn.wav')
-pygame.mixer.music.load('Anaconda.mp3')
+pygame.mixer.music.load('Anaconda.wav')
 pygame.mixer.music.play(-1)
 
 # title and score font creation
@@ -98,15 +98,20 @@ while snake.is_alive:
      #snake + border collision properties
     if snake.body[0][0] < wall_left + snake.width - snake.width / 2:
         snake.is_alive = False
+        horn_sound.play()
     elif snake.body[0][0] > wall_right - snake.width:
         snake.is_alive = False
+        horn_sound.play()
     elif snake.body[0][1] < wall_top:
         snake.is_alive = False
+        horn_sound.play()
     elif snake.body[0][1] > wall_bottom - snake.height:
         snake.is_alive = False
+        horn_sound.play()
     # snake dies if touches self
     if snake.collides_with_self():
         snake.is_alive = False
+        horn_sound.play()
 
     pygame.display.update()
     clock.tick(10)
@@ -125,6 +130,6 @@ while show_final_screen:
         elif event.type == pygame.KEYDOWN:
             if event.key == pygame.K_SPACE:
                 show_final_screen = False
-
+    pygame.mixer.music.stop()
 
 pygame.quit()
