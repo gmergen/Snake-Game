@@ -52,7 +52,7 @@ class Snake:
                 and self.ycor + self.height > part[1]: 
                 return True
         return False
-    def grow(self):
+    def grow(self): 
         # for last body part
         x = self.body[len(self.body) - 1][0]
         y = self.body[len(self.body) - 1][1]
@@ -62,11 +62,19 @@ class Snake:
         # add to snake's body for each direction
         if x < x2:
             self.body.append((x - self.width, y))
+            self.body.append((x - self.width, y))
+            self.body.append((x - self.width, y))
         elif x > x2:
+            self.body.append((x + self.width, y))
+            self.body.append((x + self.width, y))
             self.body.append((x + self.width, y))
         elif y < y2:
             self.body.append((x, y - self.height))
+            self.body.append((x, y - self.height))
+            self.body.append((x, y - self.height))
         elif y > y2:
+            self.body.append((x, y + self.height))
+            self.body.append((x, y + self.height))
             self.body.append((x, y + self.height))
     def change_score(self, amount_to_change_by):
         self.score += amount_to_change_by 

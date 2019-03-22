@@ -32,6 +32,7 @@ blue = (0,0,255)
 
 pygame.init()
 
+
 # load object images
 snake_Image = pygame.image.load("greenSquare.jpg")
 mouse_Image = pygame.image.load("mouse.gif")
